@@ -40,6 +40,7 @@ func insertBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	books = append(books, book)
+	json.NewEncoder(w).Encode(book)
 }
 func main() {
 	books = append(books, &Book{Name: "Physics", ID: "224453", Description: "quantum physics"},
