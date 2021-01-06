@@ -19,10 +19,11 @@ type Book struct {
 }
 
 func getBooks(w http.ResponseWriter, r *http.Request) {
-
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(books)
 }
 func getBook(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
 	id := vars["id"]
 	for _, each := range books {
@@ -34,6 +35,7 @@ func getBook(w http.ResponseWriter, r *http.Request) {
 }
 func insertBook(w http.ResponseWriter, r *http.Request) {
 	var book *Book
+	w.Header().Set("Content-Type", "application/json")
 	err := json.NewDecoder(r.Body).Decode(book)
 	if err != nil {
 		fmt.Println(err.Error())
