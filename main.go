@@ -34,14 +34,14 @@ func getBook(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func insertBook(w http.ResponseWriter, r *http.Request) {
-	var book *Book
+	var book Book
 	w.Header().Set("Content-Type", "application/json")
-	err := json.NewDecoder(r.Body).Decode(book)
+	err := json.NewDecoder(r.Body).Decode(&book)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
-	books = append(books, book)
+	books = append(books, &book)
 	json.NewEncoder(w).Encode(book)
 }
 func main() {
